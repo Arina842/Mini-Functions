@@ -1,0 +1,8 @@
+sigma = np.arange(0, 100, 0.01)
+tao45 = np.sqrt((sigma/np.cos(45*np.pi/180))**2-sigma**2)
+
+tao35 = np.sqrt((sigma/np.cos(55*np.pi/180))**2-sigma**2)
+tao25 = np.sqrt((sigma/np.cos(65*np.pi/180))**2-sigma**2)
+plt.plot(sigma, tao45)
+plt.plot(sigma, tao35)
+plt.plot(sigma, tao25)
