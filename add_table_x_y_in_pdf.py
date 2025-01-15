@@ -13,7 +13,7 @@ from reportlab.lib.enums import TA_LEFT  # Выравнивание по лев�
 
 
 
-# sample_date = "12.06.2024"   #4 cкважина
+# sample_date = "12.06.2024"   
 # test_start_date = "08.08.2024"
 
 
