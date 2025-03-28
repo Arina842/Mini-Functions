@@ -1,0 +1,12 @@
+import numpy as np
+
+c = 0.0002
+fi_degrees = 33  #  Градусы
+sigma_3 = 0.002
+
+# Преобразуем градусы в радианы
+fi_radians = np.radians(fi_degrees)
+
+# Вычисляем выражение, используя радианы
+result = (2 * (c * 1000 + (np.tan(fi_radians)) * sigma_3)) / (np.cos(fi_radians) - np.tan(fi_radians) + np.sin(fi_radians) * np.tan(fi_radians))
+print(result)
