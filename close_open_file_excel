@@ -1,0 +1,55 @@
+import xlwings as xw
+import os
+
+
+def close_excel_file(file_path):
+    """
+    Закрывает файл Excel, если он открыт
+
+    Args:
+        file_path: Полный путь к файлу Excel
+    """
+    try:
+        # Получаем имя файла для поиска
+        file_name = os.path.basename(file_path)
+
+        # Проверяем все запущенные экземпляры Excel
+        for app in xw.apps:
+            # Ищем нашу книгу среди открытых книг в приложении
+            for book in app.books:
+                # Сравниваем пути (учитываем возможные различия в регистре)
+                if (book.fullname.lower() == file_path.lower() or
+                        os.path.basename(book.fullname).lower() == file_name.lower()):
+
+                    print(f"Найден открытый файл: {book.name}")
+
+                    # Сохраняем изменения перед закрытием (опционально)
+                    try:
+                        book.save()
+                        print("  Изменения сохранены")
+                    except:
+                        print("  Не удалось сохранить изменения")
+
+                    # Закрываем книгу
+                    book.close()
+                    print(f"  Файл закрыт")
+
+                    # Проверяем, остались ли другие книги в приложении
+                    if len(app.books) == 0:
+                        # Если нет открытых книг, закрываем приложение
+                        app.quit()
+                        print("  Приложение Excel закрыто")
+
+                    return True
+
+        print(f"Файл не найден среди открытых: {file_name}")
+        return False
+
+    except Exception as e:
+        print(f"Ошибка при закрытии файла: {e}")
+        return False
+
+
+# Использование
+file_path = r'Z:\kzzz\ Расчёт.xls'
+close_excel_file(file_path)
